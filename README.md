@@ -1,2 +1,6 @@
 Trabalho de LP1 - N2
-Branch: ViewModel
+Branch: 
+ViewModel
+DAO
+Helper
+Controller
