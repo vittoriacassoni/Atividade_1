@@ -14,7 +14,7 @@ namespace Trabalho_1.DAO
         /// <param name="model">Entity to add</param>
         public void Add(PersonViewModel model)
         {
-            string sql = "insert into ODS_PERSONAL_DATA (CPF, [ADDRESS], TELEPHONE, EMAIL_ADDRESS, PRETENSION_SALARY, INTENDED_POSITION) " +
+            string sql = "insert into ODS_PERSONAL_DATA (CPF, HOME_ADDRESS, TELEPHONE, EMAIL_ADDRESS, PRETENSION_SALARY, INTENDED_POSITION) " +
                          "values (@CPF, @ADDRESS, @TELEPHONE, @EMAIL_ADDRESS, @PRETENSION_SALARY, @INTENDED_POSITION)";
             HelperDAO.ExecuteSQL(sql, CreateParameters(model));
         }
@@ -61,8 +61,8 @@ namespace Trabalho_1.DAO
         {
             return new PersonViewModel()
             {
-                CPF = Convert.ToInt32(dr["CPF"]),
-                Address = dr["ADDRESS"].ToString(),
+                CPF = dr["CPF"].ToString(),
+                Address = dr["HOME_ADDRESS"].ToString(),
                 Telephone = dr["TELEPHONE"].ToString(),
                 EmailAddress = dr["EMAIL_ADDRESS"].ToString(),
                 PretensionSalary = Convert.ToDouble(dr["PRETENSION_SALARY"]).ToString(),
