@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 using Trabalho_1.Models;
 
 namespace Trabalho_1.DAO
 {
     public class PersonDAO
     {
+        private SqlParameter[] CreateParameters(PersonViewModel model)
+        {
+            SqlParameter[] parametros = new SqlParameter[6];
+            parametros[0] = new SqlParameter("CPF", model.CPF);
+            parametros[1] = new SqlParameter("HOME_ADDRESS", model.HOME_ADDRESS);
+            parametros[2] = new SqlParameter("TELEPHONE", model.TELEPHONE);
+            parametros[3] = new SqlParameter("EMAIL_ADDRESS", model.EMAIL_ADDRESS);
+            parametros[4] = new SqlParameter("PRETENSION_SALARY", model.PRETENSION_SALARY);
+            parametros[5] = new SqlParameter("INTENDED_POSITION", model.INTENDED_POSITION);
+            return parametros;
+        }
         /// <summary>
         /// Method to add
         /// </summary>
@@ -50,7 +62,7 @@ namespace Trabalho_1.DAO
         public PersonViewModel GetRecordById(string id)
         {
             string sql = "select * from ODS_PERSONAL_DATA where CPF = " + id;
-            DataTable table = HelperDAO.ExecuteSQL(sql, null);
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)
                 return null;
@@ -66,7 +78,7 @@ namespace Trabalho_1.DAO
         {
             List<PersonViewModel> list = new List<PersonViewModel>();
             string sql = "select * from ODS_PERSONAL_DATA";
-            DataTable table = HelperDAO.ExecuteSQL(sql, null);
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             foreach(DataRow dr in table.Rows)
             {

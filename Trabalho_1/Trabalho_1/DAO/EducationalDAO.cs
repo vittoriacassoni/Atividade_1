@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 using Trabalho_1.Models;
 
 namespace Trabalho_1.DAO
 {
     public class EducationalDAO
     {
+        private SqlParameter[] CreateParameters(EducationalViewModel model)
+        {
+            SqlParameter[] parametros = new SqlParameter[6];
+            parametros[0] = new SqlParameter("ID_COURSE", model.ID_COURSE);
+            parametros[1] = new SqlParameter("BEGINNING_DATE", model.BEGINNING_DATE);
+            parametros[2] = new SqlParameter("CONCLUSION_DATE", model.CONCLUSION_DATE);
+            parametros[3] = new SqlParameter("SCHOOL_NAME", model.SCHOOL_NAME);
+            parametros[4] = new SqlParameter("COURSE_NAME", model.COURSE_NAME);
+            parametros[5] = new SqlParameter("CPF", model.CPF_EDUCATIONAL);
+            return parametros;
+        }
         /// <summary>
         /// Method to add
         /// </summary>
@@ -53,7 +65,7 @@ namespace Trabalho_1.DAO
         public EducationalViewModel GetRecordById(string id)
         {
             string sql = "select * from ODS_EDUCATIONAL_BACKGROUND where CPF = " + id;
-            DataTable table = HelperDAO.ExecuteSQL(sql, null);
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)
                 return null;
@@ -69,7 +81,7 @@ namespace Trabalho_1.DAO
         {
             List<EducationalViewModel> list = new List<EducationalViewModel>();
             string sql = "select * from ODS_EDUCATIONAL_BACKGROUND";
-            DataTable table = HelperDAO.ExecuteSQL(sql, null);
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             foreach(DataRow dr in table.Rows)
             {

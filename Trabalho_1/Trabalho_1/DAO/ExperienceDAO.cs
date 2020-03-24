@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 using Trabalho_1.Models;
 
 namespace Trabalho_1.DAO
 {
     public class ExperienceDAO
     {
+        private SqlParameter[] CreateParameters(ExperienceViewModel model)
+        {
+            SqlParameter[] parametros = new SqlParameter[4];
+            parametros[0] = new SqlParameter("PREVIOUS_COMPANY_NAME", model.COMPANY_NAME);
+            parametros[1] = new SqlParameter("PREVIOUS_POSITION", model.PREVIOUS_POSITION);
+            parametros[2] = new SqlParameter("PREVIOUS_SALARY", model.PREVIOUS_SALARY);
+            parametros[3] = new SqlParameter("CPF", model.CPF_EXPERIENCE);
+            return parametros;
+        }
         /// <summary>
         /// Method to add
         /// </summary>
@@ -51,7 +61,7 @@ namespace Trabalho_1.DAO
         public ExperienceViewModel GetRecordById(string id)
         {
             string sql = "select * from ODS_PROFESSIONAL_EXPERIENCE where CPF = " + id;
-            DataTable table = HelperDAO.ExecuteSQL(sql, null);
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)
                 return null;
@@ -67,7 +77,7 @@ namespace Trabalho_1.DAO
         {
             List<ExperienceViewModel> list = new List<ExperienceViewModel>();
             string sql = "select * from ODS_PROFESSIONAL_EXPERIENCE";
-            DataTable table = HelperDAO.ExecuteSQL(sql, null);
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             foreach (DataRow dr in table.Rows)
             {

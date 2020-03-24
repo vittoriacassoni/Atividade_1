@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 using Trabalho_1.Models;
 
 namespace Trabalho_1.DAO
 {
     public class LanguageDAO
     {
+        private SqlParameter[] CreateParameters(LanguageViewModel model)
+        {
+            SqlParameter[] parametros = new SqlParameter[3];
+            parametros[0] = new SqlParameter("LANGUAGE_NAME", model.LANGUAGE_NAME);
+            parametros[1] = new SqlParameter("SCHOOL_LANGUAGE_NAME", model.SCHOOL_LANGUAGE_NAME);
+            parametros[2] = new SqlParameter("ID_COURSE", model.ID_COURSE);
+            return parametros;
+        }
         /// <summary>
         /// Method to add
         /// </summary>
@@ -50,7 +59,7 @@ namespace Trabalho_1.DAO
         public LanguageViewModel GetRecordById(string id)
         {
             string sql = "select * from ODS_LANGUAGE where ID_COURSE = " + id;
-            DataTable table = HelperDAO.ExecuteSQL(sql, null);
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)
                 return null;
@@ -66,7 +75,7 @@ namespace Trabalho_1.DAO
         {
             List<LanguageViewModel> list = new List<LanguageViewModel>();
             string sql = "select * from ODS_LANGUAGE";
-            DataTable table = HelperDAO.ExecuteSQL(sql, null);
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             foreach(DataRow dr in table.Rows)
             {
