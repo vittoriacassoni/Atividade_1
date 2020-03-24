@@ -150,7 +150,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAO\ConnectionDB.cs" />
+    <Compile Include="DAO\EducationalDAO.cs" />
+    <Compile Include="DAO\LanguageDAO.cs" />
     <Compile Include="DAO\PersonDAO.cs" />
+    <Compile Include="DAO\ExperienceDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

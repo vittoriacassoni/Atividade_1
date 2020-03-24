@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using Trabalho_1.Models;
 
 namespace Trabalho_1.DAO
 {
@@ -15,25 +16,38 @@ namespace Trabalho_1.DAO
         public void Add(PersonViewModel model)
         {
             string sql = "insert into ODS_PERSONAL_DATA (CPF, HOME_ADDRESS, TELEPHONE, EMAIL_ADDRESS, PRETENSION_SALARY, INTENDED_POSITION) " +
-                         "values (@CPF, @ADDRESS, @TELEPHONE, @EMAIL_ADDRESS, @PRETENSION_SALARY, @INTENDED_POSITION)";
+                         "values (@CPF, @HOME_ADDRESS, @TELEPHONE, @EMAIL_ADDRESS, @PRETENSION_SALARY, @INTENDED_POSITION)";
             HelperDAO.ExecuteSQL(sql, CreateParameters(model));
         }
 
+        /// <summary>
+        /// Method to update
+        /// </summary>
+        /// <param name="model">Entity to update</param>
         public void Update(PersonViewModel model)
         {
-            string sql = "update ODS_PERSONAL_DATA set [ADDRESS] = @ADDRESS, TELEPHONE = @TELEPHONE, " +
+            string sql = "update ODS_PERSONAL_DATA set HOME_ADDRESS = @HOME_ADDRESS, TELEPHONE = @TELEPHONE, " +
                          "EMAIL_ADDRESS = @EMAIL_ADDRESS, INTENDED_POSITION = @INTENDED_POSITION " +
                          "where CPF = @CPF";
             HelperDAO.ExecuteSQL(sql, CreateParameters(model));
         }
 
-        public void Delete(int id)
+        /// <summary>
+        /// Method to delete
+        /// </summary>
+        /// <param name="id">Entity to delete</param>
+        public void Delete(string id)
         {
-            string sql = "delete ODS_PERSONAL where CPF = " + id;
+            string sql = "delete ODS_PERSONAL_DATA where CPF = " + id;
             HelperDAO.ExecuteSQL(sql, null);
         }
 
-        public PersonViewModel GetRecordById(int id)
+        /// <summary>
+        /// Method to return a person record
+        /// </summary>
+        /// <param name="id">Entity to to return a person record</param>
+        /// <returns>model</returns>
+        public PersonViewModel GetRecordById(string id)
         {
             string sql = "select * from ODS_PERSONAL_DATA where CPF = " + id;
             DataTable table = HelperDAO.ExecuteSQL(sql, null);
@@ -44,6 +58,10 @@ namespace Trabalho_1.DAO
                 return CreatePerson(table.Rows[0]);
         }
 
+        /// <summary>
+        /// Method to return the personal data table
+        /// </summary>
+        /// <returns>list</returns>
         public List<PersonViewModel> List()
         {
             List<PersonViewModel> list = new List<PersonViewModel>();
@@ -52,21 +70,22 @@ namespace Trabalho_1.DAO
 
             foreach(DataRow dr in table.Rows)
             {
-                List.Add(CreatePerson(dr));
+                list.Add(CreatePerson(dr));
             }
             return list;
         }
+
 
         public PersonViewModel CreatePerson(DataRow dr)
         {
             return new PersonViewModel()
             {
                 CPF = dr["CPF"].ToString(),
-                Address = dr["HOME_ADDRESS"].ToString(),
-                Telephone = dr["TELEPHONE"].ToString(),
-                EmailAddress = dr["EMAIL_ADDRESS"].ToString(),
-                PretensionSalary = Convert.ToDouble(dr["PRETENSION_SALARY"]).ToString(),
-                IntendedPosition = dr["INTENDED_POSITION"].ToString()
+                HOME_ADDRESS = dr["HOME_ADDRESS"].ToString(),
+                TELEPHONE = dr["TELEPHONE"].ToString(),
+                EMAIL_ADDRESS = dr["EMAIL_ADDRESS"].ToString(),
+                PRETENSION_SALARY = Convert.ToDouble(dr["PRETENSION_SALARY"]),
+                INTENDED_POSITION = dr["INTENDED_POSITION"].ToString()
             };
         }
     }
