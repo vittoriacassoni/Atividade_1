@@ -10,6 +10,10 @@ namespace Atividade_1.Models
     {
         [Display(Name = "CPF")]
         public string CPF { get; set; }
+        [Display(Name = "Nome")]
+        public string NAME { get; set; }
+        [Display(Name = "Data de Nascimento")]
+        public DateTime DATE_OF_BIRTH { get; set; }
         [Display(Name = "Endereço")]
         public string HOME_ADDRESS { get; set; }
         [Display(Name = "Telefone")]
