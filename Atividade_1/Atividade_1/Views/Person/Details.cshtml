@@ -1,0 +1,67 @@
+﻿@model Atividade_1.Models.PersonViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PersonViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CPF)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NAME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NAME)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DATE_OF_BIRTH)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DATE_OF_BIRTH)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HOME_ADDRESS)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HOME_ADDRESS)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEPHONE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TELEPHONE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL_ADDRESS)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL_ADDRESS)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PRETENSION_SALARY)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PRETENSION_SALARY)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.INTENDED_POSITION)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.INTENDED_POSITION)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
