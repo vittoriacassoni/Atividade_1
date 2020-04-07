@@ -1,0 +1,59 @@
+﻿@model Atividade_1.Models.EducationalViewModel
+
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Form</h2>
+
+<h4>EducationalViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID_COURSE" class="control-label"></label>
+                <input asp-for="ID_COURSE" class="form-control" />
+                <span asp-validation-for="ID_COURSE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BEGINNING_DATE" class="control-label"></label>
+                <input asp-for="BEGINNING_DATE" class="form-control" />
+                <span asp-validation-for="BEGINNING_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CONCLUSION_DATE" class="control-label"></label>
+                <input asp-for="CONCLUSION_DATE" class="form-control" />
+                <span asp-validation-for="CONCLUSION_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SCHOOL_NAME" class="control-label"></label>
+                <input asp-for="SCHOOL_NAME" class="form-control" />
+                <span asp-validation-for="SCHOOL_NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="COURSE_NAME" class="control-label"></label>
+                <input asp-for="COURSE_NAME" class="form-control" />
+                <span asp-validation-for="COURSE_NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPF_EDUCATIONAL" class="control-label"></label>
+                <input asp-for="CPF_EDUCATIONAL" class="form-control" />
+                <span asp-validation-for="CPF_EDUCATIONAL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
