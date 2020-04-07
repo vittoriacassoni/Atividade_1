@@ -1,8 +1,34 @@
-﻿
+﻿@model List<PersonViewModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
+
+
+<a href="/person/create">New Register</a>
+<br />
+
+<table class="table table-responsive">
+    <tr>
+        <th>CPF</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>E-mail</th>
+        <th>Açoes</th>
+    </tr>
+
+    @foreach (var person in Model)
+    {
+        <tr>
+            <td>@person.CPF</td>
+            <td>@person.NAME</td>
+            <td>@person.TELEPHONE</td>
+            <td>@person.EMAIL_ADDRESS</td>
+            <td></td>
+        </tr>
+    }
+</table>
+
 

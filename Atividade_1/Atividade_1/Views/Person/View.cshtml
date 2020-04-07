@@ -18,6 +18,9 @@
                 @Html.DisplayNameFor(model => model.CPF)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.NAME)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.TELEPHONE)
             </th>
             <th>
@@ -29,22 +32,25 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CPF)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TELEPHONE)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EMAIL_ADDRESS)
-                </td>    
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TELEPHONE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMAIL_ADDRESS)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
         }
     </tbody>
 </table>
