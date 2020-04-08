@@ -16,12 +16,13 @@ namespace Atividade_1.Controllers
             List<PersonViewModel> list = DAO.List();
             return View(list);
         }
-        public ActionResult Details(string id)
+        public IActionResult Details(string id)
         {
             try
             {
-                PersonDAO person = new PersonDAO();
-                person.GetRecordById(id);
+                PersonDAO DAO = new PersonDAO();
+                PersonViewModel person = new PersonViewModel();
+                person = DAO.GetRecordById(id);
                 return View(person);
             }
             catch (Exception erro)

@@ -70,7 +70,7 @@ namespace Atividade_1.DAO
         /// <returns>model</returns>
         public EducationalViewModel GetRecordById(string id)
         {
-            string sql = "select * from ODS_EDUCATIONAL_BACKGROUND where CPF = " + id;
+            string sql = $"select * from ODS_EDUCATIONAL_BACKGROUND where CPF = '{id}'";
             DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)
@@ -78,7 +78,24 @@ namespace Atividade_1.DAO
             else
                 return AddEducational(table.Rows[0]);
         }
+        
+        /// <summary>
+        /// Method to return an list of educational records
+        /// </summary>
+        /// <param name="id">Entity to return an list of educational records</param>
+        /// <returns>model</returns>
+        public List<EducationalViewModel> ListEducationById(string id)
+        {
+            string sql = $"select * from ODS_EDUCATIONAL_BACKGROUND where CPF = '{id}'";
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
+            List<EducationalViewModel> list = new List<EducationalViewModel>();
+            foreach (DataRow dr in table.Rows)
+            {
+                list.Add(AddEducational(dr));
+            }
+            return list;
+        }
         /// <summary>
         /// Method to return the educational table
         /// </summary>

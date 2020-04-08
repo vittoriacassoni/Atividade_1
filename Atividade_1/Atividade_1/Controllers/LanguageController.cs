@@ -14,13 +14,14 @@ namespace Atividade_1.Controllers
         {
             return View();
         }
-        public ActionResult Details(int id)
+        public IActionResult Details(string id)
         {
             try
             {
-                LanguageDAO language = new LanguageDAO();
-                language.GetRecordById(id);
-                return View(language);
+                LanguageDAO DAO = new LanguageDAO();
+                List<LanguageViewModel> languages = new List<LanguageViewModel>();
+                languages = DAO.ListLanguageById(id);
+                return View(languages);
             }
             catch (Exception erro)
             {

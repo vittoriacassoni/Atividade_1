@@ -1,34 +1,52 @@
 ﻿@model List<PersonViewModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Currículos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-
-<a href="/person/create">New Register</a>
+<h2>@ViewData["Title"]</h2>
 <br />
 
-<table class="table table-responsive">
-    <tr>
-        <th>CPF</th>
-        <th>Nome</th>
-        <th>Telefone</th>
-        <th>E-mail</th>
-        <th>Açoes</th>
-    </tr>
 
-    @foreach (var person in Model)
-    {
+<a href="/Person/Create" class="btn-create">Cadastrar</a>
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-responsive" style="margin-top: 20px;">
         <tr>
-            <td>@person.CPF</td>
-            <td>@person.NAME</td>
-            <td>@person.TELEPHONE</td>
-            <td>@person.EMAIL_ADDRESS</td>
-            <td></td>
+            <th>CPF</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th></th>
         </tr>
+
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td style="vertical-align: middle">@person.CPF</td>
+                <td style="vertical-align: middle">@person.NAME</td>
+                <td style="vertical-align: middle">@person.TELEPHONE</td>
+                <td style="vertical-align: middle">@person.EMAIL_ADDRESS</td>
+                <td style="text-align: end">
+                    <button onclick="javascript:location.href='/Person/Edit?id=@person.CPF'" class="btn-edit">Editar</button>
+                    <button onclick="javascript:deletar(@person.CPF)" class="btn-remove">Excluir</button>
+                    <button onclick="javascript:location.href='/Person/Details?id=@person.CPF'" class="btn-details">Detalhes</button>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div style="margin-top: 20px;">
+        <h3>Não foram encontrados registros!</h3>
+    </div>
+}
+
+<script>
+    function deletar(id) {
+        if (confirm("Deseja realmente excluir o registro?"))
+            location.href = `/Person/Delete?id=${id}`;
     }
-</table>
-
-
+</script>

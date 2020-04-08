@@ -1,14 +1,33 @@
 ﻿@model Atividade_1.Models.PersonViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Currículo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>@ViewData["Title"]</h2>
 
+<div class="cabecalho" style="margin-top: 20px; text-align: center">
+    <h1 style="font-weight: bold">@Html.DisplayFor(model => model.NAME)</h1>
+    <div style="display: flex; justify-content: center; color: #595959">
+        <h5>@Html.DisplayFor(model => model.HOME_ADDRESS) · </h5>
+        <h5>@Html.DisplayFor(model => model.TELEPHONE) · </h5>
+        <h5>@(DateTime.Now.Year - Model.DATE_OF_BIRTH.Year) anos</h5>
+    </div>
+    <h5 style="color: #009e4a; margin: 0">@Html.DisplayFor(model => model.EMAIL_ADDRESS)</h5>
+</div>
+<hr />
+<div class="body" style="margin-left: 15vw">
+    <div class="experiencia">
+        <h4 style="color: #262626; font-weight: bold">Experiência</h4>
+        <div id="experiencia-itens" class="experiencia-itens" style="border-left: dotted 4px #BEBEBE; margin-left: 3px; margin-top: 20px;">
+            <div class="item-experiencia" style="margin-left: 40px;">
+                aaa
+            </div>
+        </div>
+    </div>
+</div>
 <div>
-    <h4>PersonViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -122,6 +141,21 @@
 </div>
 <script>
     var CPF = $('#CPF').Val();
+    $(document).ready(function () {
+        $.ajax({
+            url: '/ExperienceController/Details',
+            type: 'GET',
+            data: { id: CPF },
+            success: function (response) {
+                if (response.success) {
+
+                }
+            },
+            error: function (response) {
+
+            }
+        })
+    });
     $.ajax({
         url: '/PersonController/Details',
         type: 'GET',
@@ -148,19 +182,7 @@
 
         }
     })
-    $.ajax({
-        url: '/ExperienceController/Details',
-        type: 'GET',
-        data: { id: CPF }
-        success: function (response) {
-            if (response.success) {
 
-            }
-        },
-        error: function (response) {
-
-        }
-    })
     $.ajax({
         url: '/LanguageController/Details',
         type: 'GET',

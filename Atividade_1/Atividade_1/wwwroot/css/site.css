@@ -35,3 +35,66 @@ body {
         display: none;
     }
 }
+
+.btn-create {
+    background-color: #006600;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+}
+
+    .btn-create:hover {
+        color: white;
+    }
+
+.btn-edit {
+    background-color: #0000ff;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+}
+
+    .btn-edit:hover {
+        color: white;
+    }
+
+.btn-remove {
+    background-color: #e70000;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+}
+
+    .btn-remove:hover {
+        color: white;
+    }
+
+.btn-details {
+    background-color: #DCDCDC;
+    padding: 10px;
+    border-radius: 4px;
+    color: black;
+    border: none;
+}
+
+    .btn-details:hover {
+        color: black;
+    }
+
+
+.btn-save {
+    background-color: darkgreen;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.link-back {
+    margin-left: 10px;
+}

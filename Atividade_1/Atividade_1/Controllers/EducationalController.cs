@@ -14,13 +14,14 @@ namespace Atividade_1.Controllers
         {
             return View();
         }
-        public ActionResult Details(string id)
+        public IActionResult Details(string id)
         {
             try
             {
-                EducationalDAO education = new EducationalDAO();
-                education.GetRecordById(id);
-                return View(education);
+                EducationalDAO DAO = new EducationalDAO();
+                List<EducationalViewModel> educationals = new List<EducationalViewModel>();
+                educationals = DAO.ListEducationById(id);
+                return View(educationals);
             }
             catch (Exception erro)
             {

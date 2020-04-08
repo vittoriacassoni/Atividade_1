@@ -14,13 +14,14 @@ namespace Atividade_1.Controllers
         {
             return View();
         }
-        public ActionResult Details(string id)
+        public IActionResult Details(string id)
         {
             try
             {
-                ExperienceDAO experience = new ExperienceDAO();
-                experience.GetRecordById(id);
-                return View(experience);
+                ExperienceDAO DAO = new ExperienceDAO();
+                List<ExperienceViewModel> experiences = new List<ExperienceViewModel>();
+                experiences = DAO.ListExperienceById(id);
+                return Json(experiences, new Newtonsoft.Json.JsonSerializerSettings());
             }
             catch (Exception erro)
             {

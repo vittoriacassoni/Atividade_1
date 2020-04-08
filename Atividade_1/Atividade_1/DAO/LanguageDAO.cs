@@ -64,13 +64,31 @@ namespace Atividade_1.DAO
         /// <returns>model</returns>
         public LanguageViewModel GetRecordById(int id)
         {
-            string sql = "select * from ODS_LANGUAGE where ID_COURSE = " + id;
+            string sql = $"select * from ODS_LANGUAGE where ID_COURSE = '{id}'";
             DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)
                 return null;
             else
                 return AddLanguage(table.Rows[0]);
+        }
+
+        /// <summary>
+        /// Method to return a list of language records
+        /// </summary>
+        /// <param name="id">Entity to return an list of language records</param>
+        /// <returns>model</returns>
+        public List<LanguageViewModel> ListLanguageById(string id)
+        {
+            string sql = $"select * from ODS_LANGUAGE where CPF = '{id}'";
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
+
+            List<LanguageViewModel> list = new List<LanguageViewModel>();
+            foreach (DataRow dr in table.Rows)
+            {
+                list.Add(AddLanguage(dr));
+            }
+            return list;
         }
 
         /// <summary>

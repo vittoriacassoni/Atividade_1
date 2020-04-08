@@ -69,7 +69,7 @@ namespace Atividade_1.DAO
         /// <returns>model</returns>
         public PersonViewModel GetRecordById(string id)
         {
-            string sql = "select * from ODS_PERSONAL_DATA where CPF = " + id;
+            string sql = $"select * from ODS_PERSONAL_DATA where CPF = '{id}'";
             DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)

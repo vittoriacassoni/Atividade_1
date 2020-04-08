@@ -66,13 +66,31 @@ namespace Atividade_1.DAO
         /// <returns></returns>
         public ExperienceViewModel GetRecordById(string id)
         {
-            string sql = "select * from ODS_PROFESSIONAL_EXPERIENCE where CPF = " + id;
+            string sql = $"select * from ODS_PROFESSIONAL_EXPERIENCE where CPF = '{id}'";
             DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)
                 return null;
             else
                 return AddExperience(table.Rows[0]);
+        }
+
+        /// <summary>
+        /// Method to return a list of experience records
+        /// </summary>
+        /// <param name="id">Entity to return an list of experience records</param>
+        /// <returns>model</returns>
+        public List<ExperienceViewModel> ListExperienceById(string id)
+        {
+            string sql = $"select * from ODS_PROFESSIONAL_EXPERIENCE where CPF = '{id}'";
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
+
+            List<ExperienceViewModel> list = new List<ExperienceViewModel>();
+            foreach (DataRow dr in table.Rows)
+            {
+                list.Add(AddExperience(dr));
+            }
+            return list;
         }
 
         /// <summary>
