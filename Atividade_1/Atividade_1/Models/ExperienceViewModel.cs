@@ -16,5 +16,9 @@ namespace Atividade_1.Models
         public double PREVIOUS_SALARY { get; set; }
         [Display(Name = "CPF")]
         public string CPF_EXPERIENCE { get; set; }
+        [Display(Name = "Data de entrada da empresa")]
+        public DateTime COMPANY_ENTRY { get; set; }
+        [Display(Name = "Data de saída da empresa")]
+        public DateTime COMPANY_EXIT { get; set; }
     }
 }

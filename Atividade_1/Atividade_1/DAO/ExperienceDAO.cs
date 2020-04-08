@@ -22,6 +22,8 @@ namespace Atividade_1.DAO
             parametros[1] = new SqlParameter("PREVIOUS_POSITION", model.PREVIOUS_POSITION);
             parametros[2] = new SqlParameter("PREVIOUS_SALARY", model.PREVIOUS_SALARY);
             parametros[3] = new SqlParameter("CPF_EXPERIENCE", model.CPF_EXPERIENCE);
+            parametros[4] = new SqlParameter("COMPANY_ENTRY", model.COMPANY_ENTRY);
+            parametros[4] = new SqlParameter("COMPANY_EXIT", model.COMPANY_EXIT);
             return parametros;
         }
 
@@ -32,8 +34,8 @@ namespace Atividade_1.DAO
         public void Add(ExperienceViewModel model)
         {
             string sql = "insert into ODS_PROFESSIONAL_EXPERIENCE (PREVIOUS_COMPANY_NAME, " +
-                         "PREVIOUS_POSITION, PREVIOUS_SALARY, CPF) " +
-                         "values (@PREVIOUS_COMPANY_NAME, @PREVIOUS_POSITION, @PREVIOUS_SALARY, @CPF_EXPERIENCE)";
+                         "PREVIOUS_POSITION, PREVIOUS_SALARY, CPF, COMPANY_ENTRY, COMPANY_EXIT) " +
+                         "values (@PREVIOUS_COMPANY_NAME, @PREVIOUS_POSITION, @PREVIOUS_SALARY, @CPF_EXPERIENCE, @COMPANY_ENTRY, @COMPANY_EXIT)";
             HelperDAO.ExecuteSQL(sql, CreateParameters(model));
         }
 
@@ -45,7 +47,7 @@ namespace Atividade_1.DAO
         {
             string sql = "update ODS_PROFESSIONAL_EXPERIENCE set PREVIOUS_COMPANY_NAME = @PREVIOUS_COMPANY_NAME," +
                          "PREVIOUS_POSITION = @PREVIOUS_POSITION, PREVIOUS_SALARY = @PREVIOUS_SALARY " +
-                         "where CPF = @CPF_EXPERIENCE";
+                         "COMPANY_ENTRY = @COMPANY_ENTRY, COMPANY_EXIT = @COMPANY_EXIT where CPF = @CPF_EXPERIENCE";
             HelperDAO.ExecuteSQL(sql, CreateParameters(model));
         }
 
@@ -117,7 +119,9 @@ namespace Atividade_1.DAO
                 COMPANY_NAME = dr["COMPANY_NAME"].ToString(),
                 PREVIOUS_POSITION = dr["PREVIOUS_POSITION"].ToString(),
                 PREVIOUS_SALARY = Convert.ToDouble(dr["PREVIOUS_SALARY"]),
-                CPF_EXPERIENCE = dr["CPF"].ToString()
+                CPF_EXPERIENCE = dr["CPF"].ToString(),
+                COMPANY_ENTRY = Convert.ToDateTime(dr["COMPANY_ENTRY"]),
+                COMPANY_EXIT = Convert.ToDateTime(dr["COMPANY_EXIT"])
             };
         }
     }
