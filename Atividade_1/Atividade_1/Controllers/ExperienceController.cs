@@ -21,7 +21,11 @@ namespace Atividade_1.Controllers
                 ExperienceDAO DAO = new ExperienceDAO();
                 List<ExperienceViewModel> experiences = new List<ExperienceViewModel>();
                 experiences = DAO.ListExperienceById(id);
-                return Json(experiences, new Newtonsoft.Json.JsonSerializerSettings());
+                return Json(new
+                {
+                    sucess = true,
+                    experiences
+                }, new Newtonsoft.Json.JsonSerializerSettings());
             }
             catch (Exception erro)
             {

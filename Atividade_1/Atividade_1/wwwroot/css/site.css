@@ -98,3 +98,12 @@ body {
 .link-back {
     margin-left: 10px;
 }
+
+.item-experiencia {
+    margin-left: 40px;
+}
+
+.item-experiencia h5{
+    margin: 0;
+    font-weight: bold;
+}

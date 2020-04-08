@@ -6,7 +6,7 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-
+<input type="hidden" value="@Model.CPF" id="CPF"/>
 <div class="cabecalho" style="margin-top: 20px; text-align: center">
     <h1 style="font-weight: bold">@Html.DisplayFor(model => model.NAME)</h1>
     <div style="display: flex; justify-content: center; color: #595959">
@@ -22,7 +22,12 @@
         <h4 style="color: #262626; font-weight: bold">Experiência</h4>
         <div id="experiencia-itens" class="experiencia-itens" style="border-left: dotted 4px #BEBEBE; margin-left: 3px; margin-top: 20px;">
             <div class="item-experiencia" style="margin-left: 40px;">
-                aaa
+                <h5 style="color: #595959;">2001 - 2006</h5>
+                <div style="display: flex; margin-top: 5px;">
+                    <h5 style="color: #009e4a; font-size: 16px;">CARGO, </h5>
+                    <h5 style="color: #595959; font-size: 16px;">EMPRESA</h5>
+                </div>
+                <h6 style="color: #595959;">Salário: R$ 20000,0</h6>
             </div>
         </div>
     </div>
@@ -33,7 +38,7 @@
         <dt>
             @Html.DisplayNameFor(model => model.CPF)
         </dt>
-        <dd id="CPF">
+        <dd>
             @Html.DisplayFor(model => model.CPF)
         </dd>
         <dt>
@@ -139,16 +144,28 @@
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-    var CPF = $('#CPF').Val();
+    var CPF = $('#CPF').val();
     $(document).ready(function () {
         $.ajax({
-            url: '/ExperienceController/Details',
+            url: '/Experience/Details',
             type: 'GET',
             data: { id: CPF },
             success: function (response) {
+                console.log(response);
                 if (response.success) {
-
+                    response.experiences.map(function (obj) {
+                        var item = `<div class="item-experiencia">
+                                    <h5 style = "color: #595959;"> 2001 - 2006</h5>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <h5 style="color: #009e4a; font-size: 16px;">${obj.PREVIOUS_POSITION}, </h5>
+                                        <h5 style="color: #595959; font-size: 16px;">${obj.COMPANY_NAME}</h5>
+                                    </div>
+                                    <h6 style="color: #595959;">Salário: R$ ${obj.PREVIOUS_SALARY}</h6>
+                                </div >`
+                        $('#experiencia-itens').append(item);
+                    });
                 }
             },
             error: function (response) {
@@ -156,44 +173,44 @@
             }
         })
     });
-    $.ajax({
-        url: '/PersonController/Details',
-        type: 'GET',
-        data: { id: CPF }
-        success: function (response) {
-            if (response.success) {
+    //$.ajax({
+    //    url: '/PersonController/Details',
+    //    type: 'GET',
+    //    data: { id: CPF }
+    //    success: function (response) {
+    //        if (response.success) {
 
-            }
-        },
-        error: function (response) {
+    //        }
+    //    },
+    //    error: function (response) {
 
-        }
-    })
-    $.ajax({
-        url: '/EducationalController/Details',
-        type: 'GET',
-        data: { id: CPF }
-        success: function (response) {
-            if (response.success) {
+    //    }
+    //})
+    //$.ajax({
+    //    url: '/EducationalController/Details',
+    //    type: 'GET',
+    //    data: { id: CPF }
+    //    success: function (response) {
+    //        if (response.success) {
 
-            }
-        },
-        error: function (response) {
+    //        }
+    //    },
+    //    error: function (response) {
 
-        }
-    })
+    //    }
+    //})
 
-    $.ajax({
-        url: '/LanguageController/Details',
-        type: 'GET',
-        data: { id: CPF }
-        success: function (response) {
-            if (response.success) {
+    //$.ajax({
+    //    url: '/LanguageController/Details',
+    //    type: 'GET',
+    //    data: { id: CPF }
+    //    success: function (response) {
+    //        if (response.success) {
 
-            }
-        },
-        error: function (response) {
+    //        }
+    //    },
+    //    error: function (response) {
 
-        }
-    })
+    //    }
+    //})
 </script>
