@@ -14,7 +14,7 @@
         <dt>
             @Html.DisplayNameFor(model => model.CPF)
         </dt>
-        <dd>
+        <dd id="CPF">
             @Html.DisplayFor(model => model.CPF)
         </dd>
         <dt>
@@ -59,9 +59,119 @@
         <dd>
             @Html.DisplayFor(model => model.INTENDED_POSITION)
         </dd>
+        <dt>
+            Data Inicio
+        </dt>
+        <dd id="DataInicio">
+
+        </dd>
+        <dt>
+            Data Conclusao
+        </dt>
+        <dd id="DataConclusao">
+
+        </dd>
+        <dt>
+            Nome Escola
+        </dt>
+        <dd id="NomeEscola">
+
+        </dd>
+        <dt>
+            Curso
+        </dt>
+        <dd id="Curso">
+
+        </dd>
+        <dt>
+            Nome Companhia
+        </dt>
+        <dd id="NomeCompanhia">
+
+        </dd>
+        <dt>
+            Posição Anterior
+        </dt>
+        <dd id="PosicaoAnterior">
+
+        </dd>
+        <dt>
+            Salário Anterior
+        </dt>
+        <dd id="salarioAnterior">
+
+        </dd>
+        <dt>
+            Idioma
+        </dt>
+        <dd id="idioma">
+
+        </dd>
+        <dt>
+            Nome Escola de Idiomas
+        </dt>
+        <dd id="nomeEscolaIdiomas">
+
+        </dd>
+
     </dl>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
+<script>
+    var CPF = $('#CPF').Val();
+    $.ajax({
+        url: '/PersonController/Details',
+        type: 'GET',
+        data: { id: CPF }
+        success: function (response) {
+            if (response.success) {
+
+            }
+        },
+        error: function (response) {
+
+        }
+    })
+    $.ajax({
+        url: '/EducationalController/Details',
+        type: 'GET',
+        data: { id: CPF }
+        success: function (response) {
+            if (response.success) {
+
+            }
+        },
+        error: function (response) {
+
+        }
+    })
+    $.ajax({
+        url: '/ExperienceController/Details',
+        type: 'GET',
+        data: { id: CPF }
+        success: function (response) {
+            if (response.success) {
+
+            }
+        },
+        error: function (response) {
+
+        }
+    })
+    $.ajax({
+        url: '/LanguageController/Details',
+        type: 'GET',
+        data: { id: CPF }
+        success: function (response) {
+            if (response.success) {
+
+            }
+        },
+        error: function (response) {
+
+        }
+    })
+</script>
