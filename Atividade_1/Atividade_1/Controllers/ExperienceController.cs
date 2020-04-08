@@ -28,6 +28,45 @@ namespace Atividade_1.Controllers
             }
         }
 
+        public IActionResult Create()
+        {
+            ViewBag.Operacao = "I";
+            ExperienceViewModel person = new ExperienceViewModel();
+
+            ExperienceDAO DAO = new ExperienceDAO();
+
+            return View("Form", person);
+        }
+
+
+        public IActionResult Salvar(ExperienceViewModel experience, string Operacao)
+        {
+            try
+            {
+                ValidaDados(experience, Operacao);
+                if (ModelState.IsValid == false)
+                {
+                    ViewBag.Operacao = Operacao;
+                    return View("Form", experience);
+                }
+                else
+                {
+                    ExperienceDAO dao = new ExperienceDAO();
+                    if (dao.GetRecordById(experience.CPF_EXPERIENCE) == null)
+                        dao.Add(experience);
+                    else
+                        dao.Update(experience);
+                    return RedirectToAction("index");
+                }
+            }
+            catch (Exception erro)
+            {
+                ViewBag.Erro = "Ocorreu um erro: " + erro.Message;
+                ViewBag.Operacao = Operacao;
+                return View("Form", experience);
+            }
+        }
+
         private void ValidaDados(ExperienceViewModel experience, string operacao)
         {
             ExperienceDAO dao = new ExperienceDAO();

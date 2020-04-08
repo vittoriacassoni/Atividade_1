@@ -23,7 +23,7 @@ namespace Atividade_1.DAO
             parametros[2] = new SqlParameter("CONCLUSION_DATE", model.CONCLUSION_DATE);
             parametros[3] = new SqlParameter("SCHOOL_NAME", model.SCHOOL_NAME);
             parametros[4] = new SqlParameter("COURSE_NAME", model.COURSE_NAME);
-            parametros[5] = new SqlParameter("CPF", model.CPF_EDUCATIONAL);
+            parametros[5] = new SqlParameter("CPF_EDUCATIONAL", model.CPF_EDUCATIONAL);
             return parametros;
         }
 
@@ -33,9 +33,9 @@ namespace Atividade_1.DAO
         /// <param name="model">Entity to add</param>
         public void Add(EducationalViewModel model)
         {
-            string sql = "insert into ODS_EDUCATIONAL_BACKGROUND(ID_COURSE, BEGGINING_DATE, " +
+            string sql = "insert into ODS_EDUCATIONAL_BACKGROUND(ID_COURSE, BEGINNING_DATE, " +
                 "CONCLUSION_DATE, SCHOOL_NAME, COURSE_NAME, CPF) values " +
-                "(@ID_COURSE, @BEGGINING_DATE, @CONCLUSION_DATE, @SCHOOL_NAME, @COURSE_NAME, @" +
+                "(@ID_COURSE, @BEGINNING_DATE, @CONCLUSION_DATE, @SCHOOL_NAME, @COURSE_NAME, " +
                 "@CPF_EDUCATIONAL)";
             HelperDAO.ExecuteSQL(sql, CreateParameters(model));
         }

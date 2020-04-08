@@ -30,6 +30,34 @@ namespace Atividade_1.Controllers
             }
         }
 
+        public IActionResult Salvar(PersonViewModel person, string Operacao)
+        {
+            try
+            {
+                ValidaDados(person, Operacao);
+                if (ModelState.IsValid == false)
+                {
+                    ViewBag.Operacao = Operacao;
+                    return View("Form", person);
+                }
+                else
+                {
+                    PersonDAO dao = new PersonDAO();
+                    if (dao.GetRecordById(person.CPF) == null)
+                        dao.Add(person);
+                    else
+                        dao.Update(person);
+                    return RedirectToAction("index");
+                }
+            }
+            catch (Exception erro)
+            {
+                ViewBag.Erro = "Ocorreu um erro: " + erro.Message;
+                ViewBag.Operacao = Operacao;
+                return View("Form", person);
+            }
+        }
+
         public IActionResult Create()
         {
             ViewBag.Operacao = "I";

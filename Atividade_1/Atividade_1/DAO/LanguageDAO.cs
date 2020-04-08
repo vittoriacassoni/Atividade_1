@@ -62,7 +62,7 @@ namespace Atividade_1.DAO
         /// </summary>
         /// <param name="id">Entity to return a language record</param>
         /// <returns>model</returns>
-        public LanguageViewModel GetRecordById(string id)
+        public LanguageViewModel GetRecordById(int id)
         {
             string sql = "select * from ODS_LANGUAGE where ID_COURSE = " + id;
             DataTable table = HelperDAO.ExecuteSelect(sql, null);

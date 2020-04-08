@@ -21,7 +21,7 @@ namespace Atividade_1.DAO
             parametros[0] = new SqlParameter("PREVIOUS_COMPANY_NAME", model.COMPANY_NAME);
             parametros[1] = new SqlParameter("PREVIOUS_POSITION", model.PREVIOUS_POSITION);
             parametros[2] = new SqlParameter("PREVIOUS_SALARY", model.PREVIOUS_SALARY);
-            parametros[3] = new SqlParameter("CPF", model.CPF_EXPERIENCE);
+            parametros[3] = new SqlParameter("CPF_EXPERIENCE", model.CPF_EXPERIENCE);
             return parametros;
         }
 

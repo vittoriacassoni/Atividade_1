@@ -28,6 +28,45 @@ namespace Atividade_1.Controllers
             }
         }
 
+        public IActionResult Create()
+        {
+            ViewBag.Operacao = "I";
+            EducationalViewModel person = new EducationalViewModel();
+
+            ExperienceDAO DAO = new ExperienceDAO();
+
+            return View("Form", person);
+        }
+
+
+        public IActionResult Salvar(EducationalViewModel educational, string Operacao)
+        {
+            try
+            {
+                ValidaDados(educational, Operacao);
+                if (ModelState.IsValid == false)
+                {
+                    ViewBag.Operacao = Operacao;
+                    return View("Form", educational);
+                }
+                else
+                {
+                    EducationalDAO dao = new EducationalDAO();
+                    if (dao.GetRecordById(educational.CPF_EDUCATIONAL) == null)
+                        dao.Add(educational);
+                    else
+                        dao.Update(educational);
+                    return RedirectToAction("index");
+                }
+            }
+            catch (Exception erro)
+            {
+                ViewBag.Erro = "Ocorreu um erro: " + erro.Message;
+                ViewBag.Operacao = Operacao;
+                return View("Form", educational);
+            }
+        }
+
         private void ValidaDados(EducationalViewModel education, string operacao)
         {
             EducationalDAO dao = new EducationalDAO();
