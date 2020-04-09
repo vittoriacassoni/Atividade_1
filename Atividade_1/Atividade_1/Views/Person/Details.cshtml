@@ -6,143 +6,44 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-<input type="hidden" value="@Model.CPF" id="CPF"/>
+<input type="hidden" value="@Model.CPF" id="CPF" />
 <div class="cabecalho" style="margin-top: 20px; text-align: center">
-    <h1 style="font-weight: bold">@Html.DisplayFor(model => model.NAME)</h1>
+    <h1 style="font-weight: bold; text-transform: capitalize">@Html.DisplayFor(model => model.NAME)</h1>
     <div style="display: flex; justify-content: center; color: #595959">
-        <h5>@Html.DisplayFor(model => model.HOME_ADDRESS) · </h5>
-        <h5>@Html.DisplayFor(model => model.TELEPHONE) · </h5>
-        <h5>@(DateTime.Now.Year - Model.DATE_OF_BIRTH.Year) anos</h5>
+        <h5 style="text-transform: capitalize">@Html.DisplayFor(model => model.HOME_ADDRESS) · </h5>
+        <h5> @Html.DisplayFor(model => model.TELEPHONE) · </h5>
+        <h5> @(DateTime.Now.Year - Model.DATE_OF_BIRTH.Year) anos</h5>
     </div>
-    <h5 style="color: #009e4a; margin: 0">@Html.DisplayFor(model => model.EMAIL_ADDRESS)</h5>
+    <h5 style="color: #009e4a; margin: 0 "> @Html.DisplayFor(model => model.EMAIL_ADDRESS) </h5>
 </div>
 <hr />
 <div class="body" style="margin-left: 15vw">
     <div class="experiencia">
+        <h5 style="color: #595959">Estou a procura de atuar como @Model.INTENDED_POSITION e receber um salário próximo de R$ @Model.PRETENSION_SALARY.</h5>
+    </div>
+    <div class="experiencia" style="margin-top: 20px;">
         <h4 style="color: #262626; font-weight: bold">Experiência</h4>
         <div id="experiencia-itens" class="experiencia-itens" style="border-left: dotted 4px #BEBEBE; margin-left: 3px; margin-top: 20px;">
-            <div class="item-experiencia" style="margin-left: 40px;">
-                <h5 style="color: #595959;">2001 - 2006</h5>
-                <div style="display: flex; margin-top: 5px;">
-                    <h5 style="color: #009e4a; font-size: 16px;">CARGO, </h5>
-                    <h5 style="color: #595959; font-size: 16px;">EMPRESA</h5>
-                </div>
-                <h6 style="color: #595959;">Salário: R$ 20000,0</h6>
-            </div>
+        </div>
+    </div>
+    <div class="educacao" style="margin-top: 40px;">
+        <h4 style="color: #262626; font-weight: bold">Educação</h4>
+        <div id="educacao-itens" class="educacao-itens" style="border-left: dotted 4px #BEBEBE; margin-left: 3px; margin-top: 20px;">
+        </div>
+    </div>
+    <div class="idioma" style="margin-top: 40px;">
+        <h4 style="color: #262626; font-weight: bold">Idioma</h4>
+        <div id="idioma-itens" class="idioma-itens" style="margin-left: 3px; margin-top: 20px;">
+            <ul>
+                <li>Inglês básico na escola de idiomas Paulo Haukk</li>
+            </ul>
         </div>
     </div>
 </div>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CPF)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CPF)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NAME)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NAME)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DATE_OF_BIRTH)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DATE_OF_BIRTH)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HOME_ADDRESS)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HOME_ADDRESS)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TELEPHONE)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TELEPHONE)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EMAIL_ADDRESS)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EMAIL_ADDRESS)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PRETENSION_SALARY)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PRETENSION_SALARY)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.INTENDED_POSITION)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.INTENDED_POSITION)
-        </dd>
-        <dt>
-            Data Inicio
-        </dt>
-        <dd id="DataInicio">
-
-        </dd>
-        <dt>
-            Data Conclusao
-        </dt>
-        <dd id="DataConclusao">
-
-        </dd>
-        <dt>
-            Nome Escola
-        </dt>
-        <dd id="NomeEscola">
-
-        </dd>
-        <dt>
-            Curso
-        </dt>
-        <dd id="Curso">
-
-        </dd>
-        <dt>
-            Nome Companhia
-        </dt>
-        <dd id="NomeCompanhia">
-
-        </dd>
-        <dt>
-            Posição Anterior
-        </dt>
-        <dd id="PosicaoAnterior">
-
-        </dd>
-        <dt>
-            Salário Anterior
-        </dt>
-        <dd id="salarioAnterior">
-
-        </dd>
-        <dt>
-            Idioma
-        </dt>
-        <dd id="idioma">
-
-        </dd>
-        <dt>
-            Nome Escola de Idiomas
-        </dt>
-        <dd id="nomeEscolaIdiomas">
-
-        </dd>
-
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+<div style="margin-top: 40px;">
+    @Html.ActionLink("Editar", "Edit", "Person", new { id = Model.CPF }, new {@class="btn-save"})
+    <a href="/Person/" class="link-back">Voltar</a>
+    <br />
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -157,14 +58,42 @@
                 if (response.success) {
                     response.experiences.map(function (obj) {
                         var item = `<div class="item-experiencia">
-                                    <h5 style = "color: #595959;"> 2001 - 2006</h5>
+                                    <h5 style = "color: #595959;"> ${new Date(obj.COMPANY_ENTRY).getFullYear()} - ${obj.COMPANY_EXIT ? obj.COMPANY_EXIT : 'Atual'}</h5>
                                     <div style="display: flex; margin-top: 5px;">
                                         <h5 style="color: #009e4a; font-size: 16px;">${obj.PREVIOUS_POSITION}, </h5>
-                                        <h5 style="color: #595959; font-size: 16px;">${obj.COMPANY_NAME}</h5>
+                                        <h5 style="color: #595959; font-size: 16px;"> ${obj.COMPANY_NAME}</h5>
                                     </div>
                                     <h6 style="color: #595959;">Salário: R$ ${obj.PREVIOUS_SALARY}</h6>
-                                </div >`
+                                </div>`
                         $('#experiencia-itens').append(item);
+                    });
+                }
+            },
+            error: function (response) {
+
+            }
+        });
+
+        $.ajax({
+            url: '/Educational/Details',
+            type: 'GET',
+            data: { id: CPF },
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    response.educationals.map(function (obj) {
+                        var mesConclusao = VerificaMes(new Date(obj.CONCLUSION_DATE).getMonth());
+                        var mesInicio = VerificaMes(new Date(obj.BEGINNING_DATE).getMonth());
+
+                        var item = `<div class="item-educacao">
+                                    <h5 style = "color: #595959;"> ${mesConclusao} ${new Date(obj.CONCLUSION_DATE).getFullYear()}</h5>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <h5 style="color: #009e4a; font-size: 16px;">${obj.COURSE_NAME}, </h5>
+                                        <h5 style="color: #595959; font-size: 16px;"> ${obj.SCHOOL_NAME}</h5>
+                                    </div>
+                                    <h6 style="color: #595959;">Realizado entre ${mesInicio} ${new Date(obj.BEGINNING_DATE).getFullYear()} e ${mesConclusao} ${new Date(obj.CONCLUSION_DATE).getFullYear()}</h6>
+                                </div>`
+                        $('#educacao-itens').append(item);
                     });
                 }
             },
@@ -173,32 +102,48 @@
             }
         })
     });
-    //$.ajax({
-    //    url: '/PersonController/Details',
-    //    type: 'GET',
-    //    data: { id: CPF }
-    //    success: function (response) {
-    //        if (response.success) {
-
-    //        }
-    //    },
-    //    error: function (response) {
-
-    //    }
-    //})
-    //$.ajax({
-    //    url: '/EducationalController/Details',
-    //    type: 'GET',
-    //    data: { id: CPF }
-    //    success: function (response) {
-    //        if (response.success) {
-
-    //        }
-    //    },
-    //    error: function (response) {
-
-    //    }
-    //})
+    function VerificaMes(mes) {
+        var mesConclusao = '';
+        switch (mes) {
+            case 0:
+                mesConclusao = 'Janeiro';
+                break;
+            case 1:
+                mesConclusao = 'Fevereiro';
+                break;
+            case 2:
+                mesConclusao = 'Março';
+                break;
+            case 3:
+                mesConclusao = 'Abril';
+                break;
+            case 4:
+                mesConclusao = 'Maio';
+                break;
+            case 5:
+                mesConclusao = 'Junho';
+                break;
+            case 6:
+                mesConclusao = 'Julho';
+                break;
+            case 7:
+                mesConclusao = 'Agosto';
+                break;
+            case 8:
+                mesConclusao = 'Setembro';
+                break;
+            case 9:
+                mesConclusao = 'Outubro';
+                break;
+            case 10:
+                mesConclusao = 'Novembro';
+                break;
+            case 11:
+                mesConclusao = 'Dezembro';
+                break;
+        }
+        return mesConclusao;
+    }
 
     //$.ajax({
     //    url: '/LanguageController/Details',

@@ -114,15 +114,19 @@ namespace Atividade_1.DAO
 
         public ExperienceViewModel AddExperience(DataRow dr)
         {
-            return new ExperienceViewModel()
+            ExperienceViewModel model = new ExperienceViewModel()
             {
-                COMPANY_NAME = dr["COMPANY_NAME"].ToString(),
+                COMPANY_NAME = dr["PREVIOUS_COMPANY_NAME"].ToString(),
                 PREVIOUS_POSITION = dr["PREVIOUS_POSITION"].ToString(),
                 PREVIOUS_SALARY = Convert.ToDouble(dr["PREVIOUS_SALARY"]),
                 CPF_EXPERIENCE = dr["CPF"].ToString(),
                 COMPANY_ENTRY = Convert.ToDateTime(dr["COMPANY_ENTRY"]),
-                COMPANY_EXIT = Convert.ToDateTime(dr["COMPANY_EXIT"])
             };
+            if (dr["COMPANY_EXIT"] != DBNull.Value)
+            {
+                model.COMPANY_EXIT = Convert.ToDateTime(dr["COMPANY_EXIT"]);
+            }
+            return model;
         }
     }
 }

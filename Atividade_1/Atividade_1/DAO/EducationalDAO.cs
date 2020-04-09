@@ -118,7 +118,7 @@ namespace Atividade_1.DAO
             return new EducationalViewModel()
             {
                 ID_COURSE = Convert.ToInt32(dr["ID_COURSE"]),
-                BEGINNING_DATE = Convert.ToDateTime(dr["BEGGINING_DATE"]),
+                BEGINNING_DATE = Convert.ToDateTime(dr["BEGINNING_DATE"]),
                 CONCLUSION_DATE = Convert.ToDateTime(dr["CONCLUSION_DATE"]),
                 SCHOOL_NAME = dr["SCHOOL_NAME"].ToString(),
                 COURSE_NAME = dr["COURSE_NAME"].ToString(),

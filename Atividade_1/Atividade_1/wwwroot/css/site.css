@@ -103,7 +103,22 @@ body {
     margin-left: 40px;
 }
 
-.item-experiencia h5{
-    margin: 0;
-    font-weight: bold;
+    .item-experiencia h5 {
+        margin: 0;
+        font-weight: bold;
+    }
+
+.item-educacao {
+    margin-left: 40px;
 }
+
+    .item-educacao h5 {
+        margin: 0;
+        font-weight: bold;
+    }
+
+.idioma-itens ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+

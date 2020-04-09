@@ -19,6 +19,6 @@ namespace Atividade_1.Models
         [Display(Name = "Data de entrada da empresa")]
         public DateTime COMPANY_ENTRY { get; set; }
         [Display(Name = "Data de saída da empresa")]
-        public DateTime COMPANY_EXIT { get; set; }
+        public DateTime? COMPANY_EXIT { get; set; }
     }
 }

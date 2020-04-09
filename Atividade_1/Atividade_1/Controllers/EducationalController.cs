@@ -21,7 +21,12 @@ namespace Atividade_1.Controllers
                 EducationalDAO DAO = new EducationalDAO();
                 List<EducationalViewModel> educationals = new List<EducationalViewModel>();
                 educationals = DAO.ListEducationById(id);
-                return View(educationals);
+
+                return Json(new
+                {
+                    success = true,
+                    educationals
+                }, new Newtonsoft.Json.JsonSerializerSettings());
             }
             catch (Exception erro)
             {
