@@ -59,7 +59,13 @@ namespace Atividade_1.DAO
         /// <param name="id">string</param>
         public void Delete(string id)
         {
-            string sql = "delete ODS_PERSONAL_DATA where CPF = " + id;
+            string sql = $"delete ODS_PERSONAL_DATA where CPF = '{id}'";
+            HelperDAO.ExecuteSQL(sql, null);
+            sql = $"delete ODS_LANGUAGE where CPF = '{id}'";
+            HelperDAO.ExecuteSQL(sql, null);
+            sql = $"delete ODS_PROFESSIONAL_EXPERIENCE where CPF = '{id}'";
+            HelperDAO.ExecuteSQL(sql, null);
+            sql = $"delete ODS_EDUCATIONAL_BACKGROUND where CPF = '{id}'";
             HelperDAO.ExecuteSQL(sql, null);
         }
         /// <summary>
@@ -67,7 +73,7 @@ namespace Atividade_1.DAO
         /// </summary>
         /// <param name="id">string</param>
         /// <returns>model</returns>
-        public PersonViewModel GetRecordById(string id)
+        public PersonViewModel GetRecordByCPF(string id)
         {
             string sql = $"select * from ODS_PERSONAL_DATA where CPF = '{id}'";
             DataTable table = HelperDAO.ExecuteSelect(sql, null);

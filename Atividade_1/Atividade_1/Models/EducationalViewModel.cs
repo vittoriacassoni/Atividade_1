@@ -8,8 +8,6 @@ namespace Atividade_1.Models
 {
     public class EducationalViewModel
     {
-        [Display(Name = "Codigo do curso")]
-        public int ID_COURSE { get; set; }
         [Display(Name = "Data de inicio")]
         public DateTime BEGINNING_DATE { get; set; }
         [Display(Name = "Data de termino")]
@@ -20,5 +18,6 @@ namespace Atividade_1.Models
         public string COURSE_NAME { get; set; }
         [Display(Name = "CPF")]
         public string CPF_EDUCATIONAL { get; set; }
+        public int ID { get; set; } //hidden
     }
 }

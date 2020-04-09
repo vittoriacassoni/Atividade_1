@@ -17,13 +17,14 @@ namespace Atividade_1.DAO
         /// <returns>Parameter vector</returns>
         private SqlParameter[] CreateParameters(ExperienceViewModel model)
         {
-            SqlParameter[] parametros = new SqlParameter[4];
+            SqlParameter[] parametros = new SqlParameter[5];
             parametros[0] = new SqlParameter("PREVIOUS_COMPANY_NAME", model.COMPANY_NAME);
             parametros[1] = new SqlParameter("PREVIOUS_POSITION", model.PREVIOUS_POSITION);
             parametros[2] = new SqlParameter("PREVIOUS_SALARY", model.PREVIOUS_SALARY);
             parametros[3] = new SqlParameter("CPF_EXPERIENCE", model.CPF_EXPERIENCE);
-            parametros[4] = new SqlParameter("COMPANY_ENTRY", model.COMPANY_ENTRY);
-            parametros[4] = new SqlParameter("COMPANY_EXIT", model.COMPANY_EXIT);
+            parametros[4] = new SqlParameter("ID", model.ID);
+            //parametros[4] = new SqlParameter("COMPANY_ENTRY", model.COMPANY_ENTRY);
+            //parametros[4] = new SqlParameter("COMPANY_EXIT", model.COMPANY_EXIT);
             return parametros;
         }
 
@@ -34,8 +35,8 @@ namespace Atividade_1.DAO
         public void Add(ExperienceViewModel model)
         {
             string sql = "insert into ODS_PROFESSIONAL_EXPERIENCE (PREVIOUS_COMPANY_NAME, " +
-                         "PREVIOUS_POSITION, PREVIOUS_SALARY, CPF, COMPANY_ENTRY, COMPANY_EXIT) " +
-                         "values (@PREVIOUS_COMPANY_NAME, @PREVIOUS_POSITION, @PREVIOUS_SALARY, @CPF_EXPERIENCE, @COMPANY_ENTRY, @COMPANY_EXIT)";
+                         "PREVIOUS_POSITION, PREVIOUS_SALARY, CPF"/*, COMPANY_ENTRY, COMPANY_EXIT*/ + ") " +
+                         "values (@PREVIOUS_COMPANY_NAME, @PREVIOUS_POSITION, @PREVIOUS_SALARY, @CPF_EXPERIENCE"/*, @COMPANY_ENTRY, @COMPANY_EXIT*/ + ")";
             HelperDAO.ExecuteSQL(sql, CreateParameters(model));
         }
 
@@ -46,8 +47,8 @@ namespace Atividade_1.DAO
         public void Update(ExperienceViewModel model)
         {
             string sql = "update ODS_PROFESSIONAL_EXPERIENCE set PREVIOUS_COMPANY_NAME = @PREVIOUS_COMPANY_NAME," +
-                         "PREVIOUS_POSITION = @PREVIOUS_POSITION, PREVIOUS_SALARY = @PREVIOUS_SALARY " +
-                         "COMPANY_ENTRY = @COMPANY_ENTRY, COMPANY_EXIT = @COMPANY_EXIT where CPF = @CPF_EXPERIENCE";
+                         "PREVIOUS_POSITION = @PREVIOUS_POSITION, CPF = @CPF_EXPERIENCE, PREVIOUS_SALARY = @PREVIOUS_SALARY " +
+                         /*"COMPANY_ENTRY = @COMPANY_ENTRY, COMPANY_EXIT = @COMPANY_EXIT*/ "where ID = @ID";
             HelperDAO.ExecuteSQL(sql, CreateParameters(model));
         }
 
@@ -55,9 +56,9 @@ namespace Atividade_1.DAO
         /// Method to delete
         /// </summary>
         /// <param name="model">Entity to delete</param>
-        public void Delete(string id)
+        public void Delete(int id)
         {
-            string sql = "delete ODS_PROFESSIONAL_EXPERIENCE where CPF = " + id;
+            string sql = "delete ODS_PROFESSIONAL_EXPERIENCE where ID = " + id;
             HelperDAO.ExecuteSQL(sql, null);
         }
 
@@ -66,9 +67,20 @@ namespace Atividade_1.DAO
         /// </summary>
         /// <param name="id">Entity to return an experience record</param>
         /// <returns></returns>
-        public ExperienceViewModel GetRecordById(string id)
+        public ExperienceViewModel GetRecordByCPF(string id)
         {
             string sql = $"select * from ODS_PROFESSIONAL_EXPERIENCE where CPF = '{id}'";
+            DataTable table = HelperDAO.ExecuteSelect(sql, null);
+
+            if (table.Rows.Count == 0)
+                return null;
+            else
+                return AddExperience(table.Rows[0]);
+        }
+
+        public ExperienceViewModel GetRecordByID(int id)
+        {
+            string sql = $"select * from ODS_PROFESSIONAL_EXPERIENCE where ID = {id}";
             DataTable table = HelperDAO.ExecuteSelect(sql, null);
 
             if (table.Rows.Count == 0)
@@ -82,7 +94,7 @@ namespace Atividade_1.DAO
         /// </summary>
         /// <param name="id">Entity to return an list of experience records</param>
         /// <returns>model</returns>
-        public List<ExperienceViewModel> ListExperienceById(string id)
+        public List<ExperienceViewModel> ListExperienceByCPF(string id)
         {
             string sql = $"select * from ODS_PROFESSIONAL_EXPERIENCE where CPF = '{id}'";
             DataTable table = HelperDAO.ExecuteSelect(sql, null);
@@ -120,12 +132,15 @@ namespace Atividade_1.DAO
                 PREVIOUS_POSITION = dr["PREVIOUS_POSITION"].ToString(),
                 PREVIOUS_SALARY = Convert.ToDouble(dr["PREVIOUS_SALARY"]),
                 CPF_EXPERIENCE = dr["CPF"].ToString(),
-                COMPANY_ENTRY = Convert.ToDateTime(dr["COMPANY_ENTRY"]),
+                ID = Convert.ToInt32(dr["ID"])
+
+
+                /*COMPANY_ENTRY = Convert.ToDateTime(dr["COMPANY_ENTRY"]),
             };
             if (dr["COMPANY_EXIT"] != DBNull.Value)
             {
-                model.COMPANY_EXIT = Convert.ToDateTime(dr["COMPANY_EXIT"]);
-            }
+                model.COMPANY_EXIT = Convert.ToDateTime(dr["COMPANY_EXIT"]);*/
+            };
             return model;
         }
     }

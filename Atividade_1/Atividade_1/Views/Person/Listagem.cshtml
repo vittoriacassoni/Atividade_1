@@ -1,0 +1,114 @@
+﻿@model CompleteViewModel
+@{
+    ViewData["Title"] = "Currículos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewData["Title"]</h2>
+<br />
+
+<table class="table table-responsive" style="margin-top: 20px;">
+    <tr>
+        <th>CPF</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>E-mail</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td style="vertical-align: middle">@Model.PERSON.CPF</td>
+        <td style="vertical-align: middle">@Model.PERSON.NAME</td>
+        <td style="vertical-align: middle">@Model.PERSON.TELEPHONE</td>
+        <td style="vertical-align: middle">@Model.PERSON.EMAIL_ADDRESS</td>
+        <td style="text-align: end">
+            <button onclick="javascript:location.href='/Person/Edit?id=@Model.PERSON.CPF'" class="btn-edit">Editar</button>
+            <button onclick="javascript:deletar(@Model.PERSON.CPF)" class="btn-remove">Excluir</button>
+        </td>
+    </tr>
+
+</table>
+<br />
+<button data-toggle="collapse" data-target="#lingua">Linguas</button>
+<div id="lingua" class="collapse">
+    <br />
+    <a href="/Language/Create" class="btn-create">Adicionar lingua</a>
+    <table class="table table-responsive" style="margin-top: 20px;">
+        <tr>
+            <th>Lingua</th>
+            <th>Escola</th>
+            <th></th>
+        </tr>
+        @foreach (var l in Model.LANGUAGE)
+        {
+            <tr>
+                <td style="vertical-align: middle">@l.LANGUAGE_NAME</td>
+                <td style="vertical-align: middle">@l.SCHOOL_LANGUAGE_NAME</td>
+                <td style="text-align: end">
+                    <button onclick="javascript:location.href='/Language/Edit?id=@l.ID'" class="btn-edit">Editar</button>
+                    <button onclick="javascript:deletar(@l.ID)" class="btn-remove">Excluir</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<br />
+<button data-toggle="collapse" data-target="#educacao">Educação</button>
+<div id="educacao" class="collapse">
+    <br />
+    <a href="/Educational/Create" class="btn-create">Adicionar Educação</a>
+    <table class="table table-responsive" style="margin-top: 20px;">
+        <tr>
+            <th>Data Inicial</th>
+            <th>Data final</th>
+            <th>Escola</th>
+            <th>curso</th>
+            <th></th>
+        </tr>
+        @foreach (var e in Model.EDUCATIONAL)
+        {
+            <tr>
+                <td style="vertical-align: middle">@e.BEGINNING_DATE</td>
+                <td style="vertical-align: middle">@e.CONCLUSION_DATE</td>
+                <td style="vertical-align: middle">@e.SCHOOL_NAME</td>
+                <td style="vertical-align: middle">@e.COURSE_NAME</td>
+                <td style="text-align: end">
+                    <button onclick="javascript:location.href='/Educational/Edit?id=@e.ID'" class="btn-edit">Editar</button>
+                    <button onclick="javascript:deletar(@e.ID)" class="btn-remove">Excluir</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<br />
+<button data-toggle="collapse" data-target="#experiencia">Experiencias</button>
+<div id="experiencia" class="collapse">
+    <br />
+    <a href="/Experience/Create" class="btn-create">Adicionar Experiencia</a>
+    <table class="table table-responsive" style="margin-top: 20px;">
+        <tr>
+            <th>Empresa</th>
+            <th>Cargo</th>
+            <th>Salario</th>
+            <th></th>
+        </tr>
+        @foreach (var e in Model.EXPERIENCE)
+        {
+
+            <tr>
+                <td style="vertical-align: middle">@e.COMPANY_NAME</td>
+                <td style="vertical-align: middle">@e.PREVIOUS_POSITION</td>
+                <td style="vertical-align: middle">@e.PREVIOUS_SALARY</td>
+                <td style="text-align: end">
+                    <button onclick="javascript:location.href='/Experience/Edit?id=@e.ID'" class="btn-edit">Editar</button>
+                    <button onclick="javascript:deletar(@e.ID)" class="btn-remove">Excluir</button>
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
+
+<script>
+    function deletar(id) {
+        if (confirm("Deseja realmente excluir o registro?"))
+            location.href = `/Person/Delete?id=${id}`;
+    }</script>

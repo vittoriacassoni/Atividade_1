@@ -20,7 +20,7 @@ namespace Atividade_1.Controllers
             {
                 EducationalDAO DAO = new EducationalDAO();
                 List<EducationalViewModel> educationals = new List<EducationalViewModel>();
-                educationals = DAO.ListEducationById(id);
+                educationals = DAO.ListEducationByCPF(id);
 
                 return Json(new
                 {
@@ -58,11 +58,11 @@ namespace Atividade_1.Controllers
                 else
                 {
                     EducationalDAO dao = new EducationalDAO();
-                    if (dao.GetRecordById(educational.CPF_EDUCATIONAL) == null)
-                        dao.Add(educational);
-                    else
+                    if (Operacao == "A")
                         dao.Update(educational);
-                    return RedirectToAction("index");
+                    else
+                        dao.Add(educational);
+                    return RedirectToAction("index", "Person");
                 }
             }
             catch (Exception erro)
@@ -73,19 +73,25 @@ namespace Atividade_1.Controllers
             }
         }
 
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Operacao = "A";
+            EducationalViewModel educational = new EducationalViewModel();
+
+            EducationalDAO DAO = new EducationalDAO();
+
+            educational = DAO.GetRecordByID(id);
+
+            if (educational == null)
+                return RedirectToAction("Listagem", "Person");
+            return View("Form", educational);
+        }
+
         private void ValidaDados(EducationalViewModel education, string operacao)
         {
             EducationalDAO dao = new EducationalDAO();
+            PersonDAO perDAO = new PersonDAO();
 
-            /* -------- REVISAR ESSA PARTE --------
-            if (operacao == "I" && dao.GetRecordById(education.CPF_EDUCATIONAL) != null)
-                ModelState.AddModelError("CPF", "CPF já cadastrado.");
-            if (operacao == "A" && dao.GetRecordById(education.CPF_EDUCATIONAL) == null)
-                ModelState.AddModelError("CPF", "CPF não cadastrado.");
-            */
-
-            if (education.ID_COURSE < 0)
-                ModelState.AddModelError("ID_COURSE", "Codigo do curso não pode ser negativo.");
             if (education.BEGINNING_DATE > education.CONCLUSION_DATE)
             {
                 ModelState.AddModelError("BEGINNING_DATE", "Data inicial está depois da final.");
@@ -95,6 +101,10 @@ namespace Atividade_1.Controllers
                 ModelState.AddModelError("SCHOOL_NAME", "Nome da escola é obrigatorio.");
             if (string.IsNullOrEmpty(education.COURSE_NAME))
                 ModelState.AddModelError("COURSE_NAME", "Nome do curso é obrigatorio.");
+            if (perDAO.GetRecordByCPF(education.CPF_EDUCATIONAL) == null) //procura o cpf na tabela person pra ver se aquele cpf é valido
+                ModelState.AddModelError("CPF", "CPF invalido");
+            if (operacao == "I" && dao.ListEducationByCPF(education.CPF_EDUCATIONAL).Count >= 5)
+                ModelState.AddModelError("CPF", "O numero limite de cursos com esse CPF ja foi atingido.");
         }
     }
 }

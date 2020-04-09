@@ -22,7 +22,7 @@ namespace Atividade_1.Controllers
             {
                 PersonDAO DAO = new PersonDAO();
                 PersonViewModel person = new PersonViewModel();
-                person = DAO.GetRecordById(id);
+                person = DAO.GetRecordByCPF(id);
                 return View(person);
             }
             catch (Exception erro)
@@ -44,7 +44,7 @@ namespace Atividade_1.Controllers
                 else
                 {
                     PersonDAO dao = new PersonDAO();
-                    if (dao.GetRecordById(person.CPF) == null)
+                    if (dao.GetRecordByCPF(person.CPF) == null)
                         dao.Add(person);
                     else
                         dao.Update(person);
@@ -69,12 +69,40 @@ namespace Atividade_1.Controllers
             return View("Form", person);
         }
 
+        public IActionResult Edit(string id)
+        {
+            ViewBag.Operacao = "A";
+            PersonViewModel person = new PersonViewModel();
+
+            PersonDAO DAO = new PersonDAO();
+
+            person = DAO.GetRecordByCPF(id);
+
+            if (person == null)
+                return RedirectToAction("Listagem", "Person");
+            return View("Form", person);
+        }
+
+        public IActionResult List(string id)
+        {
+            CompleteViewModel complete = new CompleteViewModel();
+            PersonDAO perDAO = new PersonDAO();
+            LanguageDAO lanDAO = new LanguageDAO();
+            ExperienceDAO expDAO = new ExperienceDAO();
+            EducationalDAO eduDAO = new EducationalDAO();
+            complete.PERSON = perDAO.GetRecordByCPF(id);
+            complete.LANGUAGE = lanDAO.ListLanguageByCPF(id);
+            complete.EXPERIENCE = expDAO.ListExperienceByCPF(id);
+            complete.EDUCATIONAL = eduDAO.ListEducationByCPF(id);
+            return View("Listagem", complete);
+        }
+
         private void ValidaDados(PersonViewModel person, string operacao)
         {
             PersonDAO dao = new PersonDAO();
-            if (operacao == "I" && dao.GetRecordById(person.CPF) != null)
+            if (operacao == "I" && dao.GetRecordByCPF(person.CPF) != null)
                 ModelState.AddModelError("CPF", "CPF já cadastrado.");
-            if (operacao == "A" && dao.GetRecordById(person.CPF) == null)
+            if (operacao == "A" && dao.GetRecordByCPF(person.CPF) == null)
                 ModelState.AddModelError("CPF", "CPF não cadastrado.");
             if (string.IsNullOrEmpty(person.NAME))
                 ModelState.AddModelError("NAME", "Nome é obrigatorio.");
